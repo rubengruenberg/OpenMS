@@ -36,6 +36,7 @@
 
 #include <OpenMS/KERNEL/RichPeak2D.h>
 #include <OpenMS/METADATA/PeptideIdentification.h>
+#include <OpenMS/METADATA/ID/IdentificationData.h>
 
 namespace OpenMS
 {
@@ -176,6 +177,15 @@ public:
     /// state of peptide identifications attached to this feature. If one ID has multiple hits, the output depends on the top-hit only
     AnnotationState getAnnotationState() const;
 
+    std::set<IdentificationData::InputItemRef>& getInputItemRefs()
+    {
+      return refs_to_id_items_;
+    }
+
+    const std::set<IdentificationData::InputItemRef>& getInputItemRefs() const
+    {
+      return refs_to_id_items_;
+    }
 protected:
 
     /// Overall quality measure of the feature
@@ -189,6 +199,9 @@ protected:
 
     /// PeptideIdentifications belonging to the feature
     std::vector<PeptideIdentification> peptides_;
+
+    /// Identification items associated with this feature (e.g., the feature itself in accurate mass search or matching MS2 precursor)
+    std::set<IdentificationData::InputItemRef> refs_to_id_items_;
   };
 
 } // namespace OpenMS

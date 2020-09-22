@@ -307,7 +307,19 @@ public:
 
     OPENMS_DLLAPI AnnotationStatistics getAnnotationStatistics() const;
 
+    IdentificationData& getIdentificationData()
+    {
+      return id_;
+    }
+
+    const IdentificationData& getIdentificationData() const
+    {
+      return id_;
+    }
+
+
 protected:
+    IdentificationData id_;
 
     /// protein identifications
     std::vector<ProteinIdentification> protein_identifications_;
